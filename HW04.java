@@ -369,7 +369,7 @@ public class HW04 {
     	 RB temp = new RB();
 
     	 //Getting input from txt file
-        BufferedReader br = new BufferedReader(new FileReader("input2.txt"));
+        BufferedReader br = new BufferedReader(new FileReader("input.txt"));
         while(true) {
             String line = br.readLine();
             if (line==null) break;
