@@ -224,7 +224,7 @@ class RB{
   				x=x.p;
   			}
   			else{
-  				if(w.left.color == 0 && w.right.color == 1){
+  				if(w.left.color == 0){
   					w.right.color = 0;
   					w.color = 1;
   					Left_Rotate(w);
