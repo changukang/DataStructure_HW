@@ -9,6 +9,10 @@ class Node {
   public int val;
   public Node left, right, p;
   public int color=0;
+  /////
+  /// color RED is assigned to integer 1
+  /// color BLACK is assigned to integer 0
+  /////
   public Node(int newval) {
     val = newval;
     left = null;
@@ -19,8 +23,7 @@ class Node {
 
 class RB{
 	public Node root = null;
-	//나중에 RB.nill 추가 고렬
-	//RB nill s.t has black color
+	//나중에 RB.nill 추가 예정
 	public RB(){
 		root = null;
 	}
@@ -43,7 +46,7 @@ class RB{
 			x.p.right = y;
 		}
 		y.left = x;
-		x.p =y;
+		x.p = y;
 	}
 
 	public void Right_Rotate(Node x){
@@ -97,9 +100,9 @@ class RB{
 						z = z.p;
 						Left_Rotate(z);
 					}
-						z.p.color = 0;//CASE 3
-						z.p.p.color = 1;
-						Right_Rotate(z.p.p);
+					z.p.color = 0;//CASE 3
+					z.p.p.color = 1;
+					Right_Rotate(z.p.p);
 					}
 					
 				}
@@ -127,7 +130,7 @@ class RB{
 				}
 			}
 
-			
+			this.root.color = 0; //To ensure the root node of Tree is black
 			}
 		}
 	}
@@ -161,26 +164,26 @@ class RB{
 	z.right = null;
 	z.color = 1;
 
-
 	RB_INSERT_FIXUP(z);
+
 	}
 
-	public void tree_print(Node tree, int level) {
+    public void tree_print(Node tree, int level) {
 
-    if (tree.right != null)
-      tree_print(tree.right, level + 1);
+	    if (tree.right != null)
+	      tree_print(tree.right, level + 1);
 
-    for(int i = 0; i < level; i++)
-      System.out.print("        ");
+	    for(int i = 0; i < level; i++)
+	      System.out.print("        ");
 
-    System.out.println(tree.val+""+tree.color);
-    if (tree.left != null)
-      tree_print(tree.left, level + 1);
-  }
+	    System.out.println(tree.val+""+tree.color);
+	    if (tree.left != null)
+	      tree_print(tree.left, level + 1);
+    }
 
-  public void RB_DELETE_FIXUP(Node x){
+   public void RB_DELETE_FIXUP(Node x){
+  	Node w =  null;
   	while(x!=this.root && x.color == 0){
-  		Node w;
   		if(x==x.p.left){
   			w = x.p.right;
   			if(w.color == 1){
@@ -227,7 +230,7 @@ class RB{
   					Left_Rotate(w);
   					w = x.p.left;
 
-  				}
+  					}
   				w.color = x.p.color;
   				x.p.color = 0;
   				w.left.color = 0;
@@ -235,16 +238,19 @@ class RB{
   				x = this.root;
   			}
   		}
-  		x.color = 0;
-	}
-  }
 
-  public Node tree_min(Node n){
-    while(n.left != null){
-      n = n.left;
-    }
-    return n;
-  }
+  		if(x!=null)
+  			x.color = 0;
+		}
+  	}
+
+	public Node tree_min(Node n){
+	    while(n.left != null){
+	      n = n.left;
+	    }
+	    return n;
+	  }
+
 	public void RB_Transplant(Node u, Node v){
 	  	if(u.p==null){
 	  		v.color =0;
@@ -262,7 +268,8 @@ class RB{
 	  	v.p = u.p;
 	 }
 
-	 public void RB_delete(Node z){
+
+	public void RB_delete(Node z){
 	 	Node y = z;
  	 	int y_org_col = y.color;
  	 	Node x = null;
@@ -316,37 +323,32 @@ class RB{
 	      return tree_search(tree.right,val);
   	}
 
+
   	public void inorder(Node tree) {
-    if (tree == null)
-      return;
-    else {
-      inorder(tree.left);
-      System.out.println(tree.val);
-      inorder(tree.right);
+    	if (tree == null)
+      		return;
+   		else {
+	      inorder(tree.left);
+	      System.out.println(tree.val);
+	      inorder(tree.right);
    		 }
  	 }
+
  	 public int NodeCount(Node tree){
  	 	int c = 1;
  	 	if( tree.right!=null) { c+= NodeCount(tree.right); }
  	 	if( tree.left!=null) { c+= NodeCount(tree.left); }
  	 	return c;
-  }
-	public int BlackNodeCount(Node tree){	
-	int c = 0;
-	 if (tree == null){
-			return 0;
-	 }
+  	}
 
-	else {
-	  c+=BlackNodeCount(tree.left);
-	  // System.out.println(tree.val);
-	  if(tree.color == 0){
-	  	c += 1;
-	  }
-	  c+=BlackNodeCount(tree.right);
-	  }
-	  return c;
+	public int BlackNodeCount(Node tree){	
+		int c = 0;
+		if(tree.left!=null) c+=BlackNodeCount(tree.left);
+		if(tree.right!=null) c+=BlackNodeCount(tree.right);
+		if(tree.color == 0) c+=1;
+		return c;
 	}
+
 
 	public int BlackHeight(Node tree){
 		if(tree==null){
@@ -391,12 +393,13 @@ public class HW04 {
         }
         br.close();
 
-        //instruction of ds13b.pdf : to show 1) num of node, 2) num of black node )black height 4) inorder traversal
-        // System.out.println("total = " + temp.NodeCount(temp.root));
-        // System.out.println("nb = " + temp.BlackNodeCount(temp.root));
-        // System.out.println("bh = " + temp.BlackHeight(temp.root));
 
-        // temp.inorder(temp.root);
+        //instruction of ds13b.pdf : to show 1) num of node, 2) num of black node )black height 4) inorder traversal
+        System.out.println("total = " + temp.NodeCount(temp.root));
+        System.out.println("nb = " + temp.BlackNodeCount(temp.root));
+        System.out.println("bh = " + temp.BlackHeight(temp.root));
+
+        temp.inorder(temp.root);
 
     //Generated following code to check if alg works well in randomly status
 	// Random random = new Random();
