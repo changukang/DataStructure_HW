@@ -371,7 +371,6 @@ public class HW04 {
             	Node del;
             	del = temp.tree_search(temp.root, num *= -1);
             	if(index == 1){
-            		System.out.println("What?"+del.val);
             		index += 1;
            		 }
             	if(del.val != 0){
