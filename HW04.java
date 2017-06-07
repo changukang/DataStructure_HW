@@ -372,12 +372,6 @@ public class HW04 {
             else if(num<0){
             	Node del;
             	del = temp.tree_search(temp.root, num *= -1);
-<<<<<<< HEAD
-=======
-            	if(index == 1){
-            		index += 1;
-           		 }
->>>>>>> origin/master
             	if(del.val != 0){
            			temp.RB_delete(del);
            		}
