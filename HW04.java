@@ -39,6 +39,8 @@ class Node {
 }
 
 class RB{
+	public int[] none_found = new int[1000]; //없느 노드를 기록하기 위함
+	public int index = 0;
 	public Node root;
 	public RB(){
 		root = Node.Nil();
@@ -370,12 +372,13 @@ public class HW04 {
             else if(num<0){
             	Node del;
             	del = temp.tree_search(temp.root, num *= -1);
-            	if(index == 1){
-            		System.out.println("What?"+del.val);
-            		index += 1;
-           		 }
             	if(del.val != 0){
            			temp.RB_delete(del);
+           		}
+           		else{
+           			num*=-1;
+           			temp.none_found[temp.index] = num;
+           			temp.index += 1;
            		}
            	}
             else if(num==0){
