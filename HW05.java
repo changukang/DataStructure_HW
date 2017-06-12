@@ -41,7 +41,7 @@ class Node {
 }
 
 class RB{
-	public int[] none_found = new int[1000]; //없느 노드를 기록하기 위함
+	public int[] none_found = new int[100000]; //없느 노드를 기록하기 위함
 	public int miss = 0;
 	public int index = 0;
 	public int insert = 0;
@@ -374,21 +374,20 @@ public class HW05 {
 
 
     	int index = 1;
-    	 RB temp = new RB();
+    	
     	 //Getting input from txt file
-    	 BufferedReader br= null;
+    	BufferedReader br= null;
 
+    	RB temp = new RB();
 
-
-    	File dir = new File("./input/"); 
+    	File dir = new File("./rbtest/"); 
 		File[] fileList = dir.listFiles(); 
 
 		for(int i = 0 ; i < fileList.length ; i++){
 				File file = fileList[i]; 
-				if(file.isFile())
-
-				br = new BufferedReader(new FileReader("./input/" + file.getName()));
-				 while(true) {
+				temp = new RB();
+				br = new BufferedReader(new FileReader("./rbtest/" + file.getName()));
+				while(true) {
 		            String line = br.readLine();
 		            // System.out.println(line);
 		            if (line==null) break;
@@ -419,16 +418,16 @@ public class HW05 {
 
 
         }
-        br.close();
-        System.out.println("filename = " + file.getName());
-        System.out.println("total = " + temp.NodeCount(temp.root));
-        System.out.println("insert = " + temp.insert);
-        System.out.println("delete = " + temp.delete);
-        System.out.println("delete = " + temp.miss);
-        System.out.println("nb = " + temp.BlackNodeCount(temp.root));
-        System.out.println("bh = " + temp.BlackHeight(temp.root));
-        temp.inorder(temp.root);
+	        br.close();
 
+	        System.out.println("filename = " + file.getName());
+	        System.out.println("total = " + temp.NodeCount(temp.root));
+	        System.out.println("insert = " + temp.insert);
+	        System.out.println("delete = " + temp.delete);
+	        System.out.println("delete = " + temp.miss);
+	        System.out.println("nb = " + temp.BlackNodeCount(temp.root));
+	        System.out.println("bh = " + temp.BlackHeight(temp.root));
+	        temp.inorder(temp.root);
 		}
 
 
