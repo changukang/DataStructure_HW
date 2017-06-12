@@ -423,7 +423,7 @@ public class HW05 {
 	        System.out.println("filename = " + file.getName());
 	        System.out.println("total = " + temp[index].NodeCount(temp[index].root));
 	        System.out.println("insert = " + temp[index].insert);
-	        System.out.println("delete = " + temp[index].delete);
+	        System.out.println("deleted = " + temp[index].delete);
 	        System.out.println("miss = " + temp[index].miss);
 	        System.out.println("nb = " + temp[index].BlackNodeCount(temp[index].root));
 	        System.out.println("bh = " + temp[index].BlackHeight(temp[index].root));
