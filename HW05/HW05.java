@@ -373,19 +373,19 @@ public class HW05 {
 
 
 
-    	int index = 1;
+    	int index = 0;
     	
     	 //Getting input from txt file
     	BufferedReader br= null;
 
-    	RB temp = new RB();
+    	RB[] temp = new RB[1000];
 
     	File dir = new File("./rbtest/"); 
 		File[] fileList = dir.listFiles(); 
 
 		for(int i = 0 ; i < fileList.length ; i++){
 				File file = fileList[i]; 
-				temp = new RB();
+				temp[index] = new RB();
 				br = new BufferedReader(new FileReader("./rbtest/" + file.getName()));
 				while(true) {
 		            String line = br.readLine();
@@ -395,21 +395,21 @@ public class HW05 {
 		            double d = Double.parseDouble(line);
 		            int num = (int)d;
 		            if(num > 0){
-		            	temp.RB_insert(new Node(num));
-		            	temp.insert +=1;
+		            	temp[index].RB_insert(new Node(num));
+		            	temp[index].insert +=1;
 		            }
 		            else if(num<0){
 		            	Node del;
-		            	del = temp.tree_search(temp.root, num *= -1);
+		            	del = temp[index].tree_search(temp[index].root, num *= -1);
 		            	if(del.val != 0){
-		           			temp.RB_delete(del);
-		           			temp.delete+=1;
+		           			temp[index].RB_delete(del);
+		           			temp[index].delete+=1;
 		           		}
 		           		else{
 		           			num*=-1;
-		           			temp.none_found[temp.index] = num;
-		           			temp.index += 1;
-		           			temp.miss+=1;
+		           			temp[index].none_found[temp[index].index] = num;
+		           			temp[index].index += 1;
+		           			temp[index].miss+=1;
 		           		}
 		           	}
 		            else if(num==0){
@@ -421,13 +421,14 @@ public class HW05 {
 	        br.close();
 
 	        System.out.println("filename = " + file.getName());
-	        System.out.println("total = " + temp.NodeCount(temp.root));
-	        System.out.println("insert = " + temp.insert);
-	        System.out.println("delete = " + temp.delete);
-	        System.out.println("delete = " + temp.miss);
-	        System.out.println("nb = " + temp.BlackNodeCount(temp.root));
-	        System.out.println("bh = " + temp.BlackHeight(temp.root));
-	        temp.inorder(temp.root);
+	        System.out.println("total = " + temp[index].NodeCount(temp[index].root));
+	        System.out.println("insert = " + temp[index].insert);
+	        System.out.println("delete = " + temp[index].delete);
+	        System.out.println("miss = " + temp[index].miss);
+	        System.out.println("nb = " + temp[index].BlackNodeCount(temp[index].root));
+	        System.out.println("bh = " + temp[index].BlackHeight(temp[index].root));
+	        temp[index].inorder(temp[index].root);
+	        index+=1;
 		}
 
 
